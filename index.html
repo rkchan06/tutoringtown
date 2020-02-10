@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="icon" href="logoonly.jpg">
+</head>
+  <style>
+        .button {
+          border: none;
+          border-color: none;
+          text-align: center;
+          font-size: 28px;
+          padding: none;
+          width: 250px;
+          cursor: pointer;
+          margin: 5px;
+          align-items: center
+          }
+
+        .button span {
+          cursor: pointer;
+          display: inline-block;
+          position: relative;
+          transition: 0.5s;
+        }
+
+        .button span:after {
+          content: '\00bb';
+          position: absolute;
+          opacity: 0;
+          top: 0;
+          right: -20px;
+          transition: 0.5s;
+        }
+
+        .button:hover span {
+          padding-right: 25px;
+        }
+
+        .button:hover span:after {
+          opacity: 1;
+          right: 0;
+        }
+           
+        .w3-myfont {
+          font-family: "Comic Sans MS", cursive, sans-serif;
+        }
+
+        .centered {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+        .containercad {
+          position: relative;
+          text-align: center;
+          color: black;
+        }
+        .centeredcad {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+        .top-leftcad {
+          position: fixed;
+          top: 8px;
+          left: 16px;
+        }
+
+        #left{
+          float:left;
+          width:50%;
+          overflow:hidden;
+          margin: 10px;
+        }
+        #right{     
+          float:left;
+          width:50%;
+          overflow:hidden;
+          margin: 10px;
+        } 
+        img:hover {
+          opacity: 0.85;
+        }
+        i.icon-blue {
+          color: #4c8bf5;
+        }
+        table {
+          border: none;
+        }
+
+        #test h5, h1 {
+
+            -webkit-animation: fadein 3s; /* Safari, Chrome and Opera > 12.1 */
+               -moz-animation: fadein 3s; /* Firefox < 16 */
+                -ms-animation: fadein 3s; /* Internet Explorer */
+                 -o-animation: fadein 3s; /* Opera < 12.1 */
+                    animation: fadein 3s;
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Firefox < 16 */
+        @-moz-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Safari, Chrome and Opera > 12.1 */
+        @-webkit-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Internet Explorer */
+        @-ms-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Opera < 12.1 */
+        @-o-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        #test h1, h5 {
+
+            -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
+               -moz-animation: fadein 4s; /* Firefox < 16 */
+                -ms-animation: fadein 4s; /* Internet Explorer */
+                 -o-animation: fadein 4s; /* Opera < 12.1 */
+                    animation: fadein 4s;
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Firefox < 16 */
+        @-moz-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Safari, Chrome and Opera > 12.1 */
+        @-webkit-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Internet Explorer */
+        @-ms-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Opera < 12.1 */
+        @-o-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+        #test h1, h4 {
+
+            -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
+               -moz-animation: fadein 4s; /* Firefox < 16 */
+                -ms-animation: fadein 4s; /* Internet Explorer */
+                 -o-animation: fadein 4s; /* Opera < 12.1 */
+                    animation: fadein 4s;
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Firefox < 16 */
+        @-moz-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Safari, Chrome and Opera > 12.1 */
+        @-webkit-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Internet Explorer */
+        @-ms-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Opera < 12.1 */
+        @-o-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+        #test h1, p {
+
+            -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
+               -moz-animation: fadein 4s; /* Firefox < 16 */
+                -ms-animation: fadein 4s; /* Internet Explorer */
+                 -o-animation: fadein 4s; /* Opera < 12.1 */
+                    animation: fadein 4s;
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Firefox < 16 */
+        @-moz-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Safari, Chrome and Opera > 12.1 */
+        @-webkit-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Internet Explorer */
+        @-ms-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Opera < 12.1 */
+        @-o-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+        #test h1, h3{
+
+            -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
+               -moz-animation: fadein 4s; /* Firefox < 16 */
+                -ms-animation: fadein 4s; /* Internet Explorer */
+                 -o-animation: fadein 4s; /* Opera < 12.1 */
+                    animation: fadein 4s;
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Firefox < 16 */
+        @-moz-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Safari, Chrome and Opera > 12.1 */
+        @-webkit-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Internet Explorer */
+        @-ms-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Opera < 12.1 */
+        @-o-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        @-webkit-keyframes bounce {
+          from,
+          20%,
+          53%,
+          80%,
+          to {
+            -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+          }
+
+          40%,
+          43% {
+            -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+            animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+            -webkit-transform: translate3d(0, -30px, 0);
+            transform: translate3d(0, -30px, 0);
+          }
+
+          70% {
+            -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+            animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+            -webkit-transform: translate3d(0, -15px, 0);
+            transform: translate3d(0, -15px, 0);
+          }
+
+          90% {
+            -webkit-transform: translate3d(0, -4px, 0);
+            transform: translate3d(0, -4px, 0);
+          }
+        }
+
+        @keyframes bounce {
+          from,
+          20%,
+          53%,
+          80%,
+          to {
+            -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+          }
+
+          40%,
+          43% {
+            -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+            animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+            -webkit-transform: translate3d(0, -30px, 0);
+            transform: translate3d(0, -30px, 0);
+          }
+
+          70% {
+            -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+            animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+            -webkit-transform: translate3d(0, -15px, 0);
+            transform: translate3d(0, -15px, 0);
+          }
+
+          90% {
+            -webkit-transform: translate3d(0, -4px, 0);
+            transform: translate3d(0, -4px, 0);
+          }
+        }
+
+        .bounce {
+          animation-delay: 0s;
+          -webkit-animation-name: bounce;
+          animation-name: bounce;
+          -webkit-transform-origin: center bottom;
+          transform-origin: center bottom;
+          display: none;
+        }
+        .bounce1 {
+          animation-delay: 0.5s;
+          -webkit-animation-name: bounce;
+          animation-name: bounce;
+          -webkit-transform-origin: center bottom;
+          transform-origin: center bottom;
+          display: none;
+        }
+        .bounce2 {
+          animation-delay: 1s;
+          -webkit-animation-name: bounce;
+          animation-name: bounce;
+          -webkit-transform-origin: center bottom;
+          transform-origin: center bottom;
+          display: none;
+        }
+
+        .animated {
+            -webkit-animation-duration: 5s;
+            animation-duration: 3s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+         }
+         
+         @-webkit-keyframes fadeInRight {
+            0% {
+               opacity: 0;
+               -webkit-transform: translateX(20px);
+            }
+            100% {
+               opacity: 1;
+               -webkit-transform: translateX(0);
+            }
+         }
+         
+         @keyframes fadeInRight {
+            0% {
+               opacity: 0;
+               transform: translateX(20px);
+            }
+            100% {
+               opacity: 1;
+               transform: translateX(0);
+            }
+         }
+         
+         .fadeInRight {
+            -webkit-animation-name: fadeInRight;
+            animation-name: fadeInRight;
+         }
+
+        @-webkit-keyframes jackInTheBox {
+          from {
+            opacity: 0;
+            -webkit-transform: scale(0.1) rotate(30deg);
+            transform: scale(0.1) rotate(30deg);
+            -webkit-transform-origin: center bottom;
+            transform-origin: center bottom;
+          }
+
+          50% {
+            -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg);
+          }
+
+          70% {
+            -webkit-transform: rotate(3deg);
+            transform: rotate(3deg);
+          }
+
+          to {
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+          }
+        }
+
+        @keyframes jackInTheBox {
+          from {
+            opacity: 0;
+            -webkit-transform: scale(0.1) rotate(30deg);
+            transform: scale(0.1) rotate(30deg);
+            -webkit-transform-origin: center bottom;
+            transform-origin: center bottom;
+          }
+
+          50% {
+            -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg);
+          }
+
+          70% {
+            -webkit-transform: rotate(3deg);
+            transform: rotate(3deg);
+          }
+
+          to {
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+          }
+        }
+
+        .jackInTheBox {
+          -webkit-animation-name: jackInTheBox;
+          animation-name: jackInTheBox;
+          display: none;
+        }
+        .jackInTheBox1 {
+          animation-delay: 0.5s;
+          -webkit-animation-name: jackInTheBox;
+          animation-name: jackInTheBox;
+          display: none;
+        }
+        .jackInTheBox2 {
+          animation-delay: 1s;
+          -webkit-animation-name: jackInTheBox;
+          animation-name: jackInTheBox;
+          display: none;
+        }
+
+
+  </style>
+
+<body>
+    <div >
+        <ul id="slide-out" class="sidenav">
+          <li>
+           <div class="user-view">
+      <div class="background">
+           <img src="navpic.jpg" width= "700px" height= "500px";>
+      </div>
+
+    <a href="#user"><div id="navphoto"></div></a>
+    <a href="#name"><span class="black-text name"><div id="name"></div></span></a>
+    <a href="#email"><span class="black-text email"><div id="email"></div></span></a>
+
+    </div>
+    </li>
+    <li><a href="index.html"><i class="material-icons">home</i>Home</a></li>
+    <li><a href="#!"><i class="material-icons">face</i>Find Tutors/Tutees</a></li>
+    <li><a href="message.html"><i class="material-icons">message</i>Messages</a></li>
+    <li><a href="profile.html"><i class="material-icons">account_circle</i>Profile</a></li>
+    <li><a href="training.html"><i class="material-icons">mode_edit</i>Training</a></li>
+    <li><div class="divider"></div></li>
+
+    </ul>
+    </div>
+
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="test">
+
+            <h1 style="margin-top: 100px; font-family: fantasy; font-style: bold;" class="header center black-text light">Welcome to Tutoring Town</h1>
+
+          <div class="row center">
+            <h5 style="margin-bottom: 50px; font-family: fantasy; font-style: italic;" class="header col s12 black-text light">Matching Tutors and Tutees Since 2020</h5>
+          <img onclick="signin()" src="googlesignin.jpg" style="margin-bottom: 70px" width="300px" height="60px">
+          </div>
+
+        </div>
+
+          <div class="top-leftcad">
+            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="medium material-icons icon-blue">menu</i></a>
+          </div>
+
+        <br><br>
+      </div>
+    </div>
+    <div class="parallax"><img src="background1.jpg" height= "500px"></div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+
+      <div class="row">
+          <table>
+            <td>
+              <div class="test">            
+                <h4 style="font-family: fantasy; font-weight: bold; margin-left: 200px; float: left;">About Us</h4>
+                <p style= "margin-right: 100px;float: left; font-size: 15px;">Here at Tutoring Town, we match tutors and tutees together based on subjects of need and personality traits. We believe it is of utmost importance for tutors and tutees to have similar interests as often times, they do not and the experience becomes extremely awkward for both people. By having similar interests, this allows for the bond to be stronger, making tutoring a more fun and enjoyable experience. </p>
+              </td><td>
+                <div id = "animated-example" class = "animated fadeInRight">
+                <img src="logovertical.jpg" style="float: right; width: 300px; height: 300px;">
+                </div>
+              </td>
+              </div>
+          </table>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h3 class="header black-text col s12 light" style="font-family: fantasy;">Why Tutoring Town?</h3>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="background2.jpg"></div>
+  </div>
+
+   <div class="container">
+    <div class="section">
+
+      <div class="row">
+              <div class="col s4">
+                <div class="center promo promo-example">
+                  <div class="animated jackInTheBox">
+                  <i class="large material-icons">mood</i>
+                  </div>
+                  <div class="animated bounce">
+                  <h2 style="font-size:25px;" class="promo-caption">Finding your tutor</h2>
+                  <p class="light center">With millions of tutors online, at least one will match your set of needs to make tutoring an enjoyable experience. Just check the find tutors page and start messaging!</p>
+                </div>
+                </div>
+              </div>
+              <div class="col s4">
+                <div class="center promo promo-example">
+                  <div class="animated jackInTheBox1">
+                  <i class="large material-icons">show_chart</i>
+                  </div>
+                  <div class="animated bounce1">
+                  <h2 style="font-size:25px;" class="promo-caption">Grades Go Up</h2>
+                  <p class="light center">Studies show that students perform better when they have tutors as they will have a better grasp of the concepts. Find a tutor to get started! </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col s4">
+                <div class="center promo promo-example">
+                  <div class="animated jackInTheBox2">
+                  <i class="large material-icons">group</i>
+                 </div>
+                 <div class="animated bounce2">
+                  <h2 style="font-size:25px;" class="promo-caption">One-on-One Training</h2>
+                  <p class="light center">One-on-one training between tutors and tutees allows for maximum productivity, eliminating all distractions from the work at hand. Make your money's worth!</p>
+                </div>
+                </div>
+              </div>
+      </div>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script>
+     var firebaseConfig = {
+        apiKey: "AIzaSyBlNsGsMWj3OpLb0POg3mKe8Rp59atOEd4",
+        authDomain: "basic-fe5bd.firebaseapp.com",
+        databaseURL: "https://basic-fe5bd.firebaseio.com",
+        projectId: "basic-fe5bd",
+        storageBucket: "basic-fe5bd.appspot.com",
+        messagingSenderId: "428339080504",
+        appId: "1:428339080504:web:88a8718913d4fced3a25cd",
+        measurementId: "G-RK3536HVTV"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+               
+        // Check to see if you are logged in
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user == null) {
+                //document.getElementById("uid").innerHTML = "not logged in";
+                return;
+            } else {
+                useremail = user.email; // you can also get .displayName, .photoURL, .email
+                //document.getElementById("uid").innerHTML = useremail; // display Google uid on page
+                
+
+            } // end user null check
+        }); // end check auth state
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user == null) {
+                document.getElementById("navphoto").innerHTML = "not logged in";
+                return;
+            } else {
+                userphoto = user.photoURL; // you can also get .displayName, .photoURL, .email
+                document.getElementById("navphoto").innerHTML = "<img src='" + userphoto + "' class='circle'>"; // display Google uid on page
+                
+
+            } // end user null check
+        }); // end check auth state
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user == null) {
+                document.getElementById("name").innerHTML = "not logged in";
+                return;
+            } else {
+                username = user.displayName; // you can also get .displayName, .photoURL, .email
+                document.getElementById("name").innerHTML = username; // display Google uid on page
+                
+
+            } // end user null check
+        }); // end check auth state
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user == null) {
+                document.getElementById("email").innerHTML = "not logged in";
+                return;
+            } else {
+                useremail = user.email; // you can also get .displayName, .photoURL, .email
+                document.getElementById("email").innerHTML = useremail; // display Google uid on page
+                userId = user.uid;
+                
+
+            } // end user null check
+        }); // end check auth state
+        function signin() {
+            var provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider).then(function(result) { 
+                window.location.replace("fbtest.html");
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+        });
+        window.onscroll = function() {handleScroll()};
+
+        function handleScroll() {
+          if (document.body.scrollTop > 450 || document.documentElement.scrollTop > 450) {
+              let animations = document.getElementsByClassName("animated");
+              for(let i = 0; i < animations.length; i++){
+                animations[i].style.display = "block"
+              }
+
+          }
+        }
+
+    </script>
+
+  </body>
+</html>
