@@ -197,6 +197,20 @@
             animation-name: fadeInRight;
          }
 
+          [type="checkbox"].filled-in:checked + span:not(.lever):after {
+            background-color: #4c8bf5 !important;
+            border: none;
+          }
+
+          [type="radio"].with-gap:checked + span:after {
+            background-color: #4c8bf5 !important;
+            border: none;
+            border: 2px solid #4c8bf5;
+          }
+          [type="radio"].with-gap:checked + span:before {
+            border: 2px solid #4c8bf5;
+          }
+
 
   </style>
 
@@ -243,6 +257,8 @@
             </div>
           </div>
 
+                         <h1 id="uid"></h1>
+
             <div class="top-leftcad">
               <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="medium material-icons icon-blue">menu</i></a>
             </div>
@@ -262,11 +278,11 @@
               <div class="row">
                 <div style="margin-left: 550px;">
                 <label>
-                  <input class="with-gap" name="group1" type="radio" id="test3" />
+                  <input name="group1" class="with-gap"  type="radio" id="test3" value="Tutor" checked />
                   <span>Tutor</span>
                 </label>
                 <label>
-                  <input class="with-gap" name="group1" type="radio" id="test3"/>
+                  <input name="group1" class="with-gap"  type="radio" id="test3" value="Tutee" />
                   <span>Tutee</span>
                 </label>
               </div>
@@ -276,35 +292,35 @@
       <div class="row">
         <br>
         <label style="margin-left: 250px;">
-        <input type="checkbox" />
+        <input type="checkbox" name="group3" value="English" class="filled-in checkbox-blue" />
         <span>English</span>
         </label>
         <label>
-        <input type="checkbox" />
+        <input type="checkbox" name="group3" value="French" class="filled-in checkbox-blue"/>
         <span>French</span>
         </label>
         <label>
-        <input type="checkbox" />
+        <input type="checkbox" name="group3" value="History" class="filled-in checkbox-blue" />
         <span>History</span>
         </label>
         <label>
-        <input type="checkbox" />
+        <input type="checkbox" name="group3" value="Geography" class="filled-in checkbox-blue" />
         <span>Geography</span>
         </label>
         <label>
-        <input type="checkbox" />
+        <input type="checkbox" name="group3" value="Math" class="filled-in checkbox-blue" />
         <span>Math</span>
         </label>
         <label>
-        <input type="checkbox" />
+        <input type="checkbox" name="group3" value="Science" class="filled-in checkbox-blue" />
         <span>Science</span>
         </label>
         <label>
-        <input type="checkbox" />
+        <input type="checkbox" name="group3" value="Music" class="filled-in checkbox-blue" />
         <span>Music</span>
         </label>
         <label>
-        <input type="checkbox" />
+        <input type="checkbox" name="group3" value="Arts" class="filled-in checkbox-blue" />
         <span>Arts</span>
         </label>
         </div>
@@ -359,70 +375,15 @@
       };
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
-               
-        // Check to see if you are logged in
+
         firebase.auth().onAuthStateChanged(function(user) {
             if (user == null) {
                 document.getElementById("uid").innerHTML = "not logged in";
                 return;
             } else {
-                userId = user.uid; // you can also get .displayName, .photoURL, .email
-                console.log(userId)
-                //document.getElementById("uid").innerHTML = userId; // display Google uid on page
-               
+                userId = user.uid; // you can also get .displayName, .photoURL, .email // display Google uid on page
             } // end user null check
         }); // end check auth state
-       
-       // HERE IS THE FUNCTION TO SHOW HOW TO GET USER DATA
-       function getData() {
-           var userId = document.getElementById("uid").innerHTML;
-           firebase.database().ref('/tweets/' + userId).once('value', function(snapshot) {
-               console.log(snapshot.val());
-           });
-
-       }
-       
-       // HERE IS THE FUNCTION TO SHOW HOW TO SET/OVERWRITE USER DATA
-       function setData() {
-           var userId = document.getElementById("uid").innerHTML;
-           var js_time = Date.now();
-           firebase.database().ref('/tweets/' + userId).set({tweet:"Set over-writes", time: js_time});
-       }
-       
-       // HERE IS THE FUNCTION TO SHOW HOW TO SET/OVERWRITE USER DATA
-       function updateData() {
-           var userId = document.getElementById("uid").innerHTML;
-           firebase.database().ref('/tweets/' + userId).update({tweet:"Update replaces data, but will leave non replaced data as is"});
-       }
-         
-        // HERE IS THE FUNCTION TO SHOW HOW TO PUSH/ADD NEW USER DATA TO EXISTING DATABASE
-        function pushData() {
-           
-            var a = document.getElementById("first_name").value
-            var b = document.getElementById("option").value
-            var c = document.getElementById("subjects").value
-            var d = document.getElementById("password").value
-            var e = document.getElementById("email").value
-            var f = document.getElementById("desc").value
-            var g = document.getElementById("icon_prefix").value
-            var h = document.getElementById("Thewebsite").value
-            alert("Your Profile Has Been Saved!")
-            var userId = document.getElementById("uid").innerHTML;
-            var js_time = Date.now();
-            var tweetid = firebase.database().ref('Users/' + userId + "/").push({FirstName: a, LastName: b,Subjects: c,Language: d,Password: e,Email: f,Desc: g,Website : h,PhoneNumber: i, time: js_time})
-           
-        }
-        function removeData() {
-            var userId = "ySF8zN14HNhOKovPdrPEGZAmoZr2"
-            var tweetid =firebase.database().ref('tweets/' + userId + "/").remove();
-           
-        }
-       
-        function signin(event) {
-                var provider = new firebase.auth.GoogleAuthProvider();
-                    firebase.auth().signInWithRedirect(provider);
-        }
-
 
         firebase.auth().onAuthStateChanged(function(user) {
             if (user == null) {
@@ -455,11 +416,88 @@
             } else {
                 useremail = user.email; // you can also get .displayName, .photoURL, .email
                 document.getElementById("email").innerHTML = useremail; // display Google uid on page
-                userId = user.uid;
-                
+
 
             } // end user null check
         }); // end check auth state
+       
+       // HERE IS THE FUNCTION TO SHOW HOW TO GET USER DATA
+       function getData() {
+           var userId = document.getElementById("uid").innerHTML;
+           firebase.database().ref('/tweets/' + userId).once('value', function(snapshot) {
+               console.log(snapshot.val());
+           });
+
+       }
+       
+       // HERE IS THE FUNCTION TO SHOW HOW TO SET/OVERWRITE USER DATA
+       function setData() {
+           var userId = document.getElementById("uid").innerHTML;
+           var js_time = Date.now();
+           firebase.database().ref('/tweets/' + userId).set({tweet:"Set over-writes", time: js_time});
+       }
+       
+       // HERE IS THE FUNCTION TO SHOW HOW TO SET/OVERWRITE USER DATA
+       function updateData() {
+           var userId = document.getElementById("uid").innerHTML;
+           firebase.database().ref('/tweets/' + userId).update({tweet:"Update replaces data, but will leave non replaced data as is"});
+       }
+         
+        // HERE IS THE FUNCTION TO SHOW HOW TO PUSH/ADD NEW USER DATA TO EXISTING DATABASE
+        function pushData() {
+            var g = document.getElementById("desc").value
+            var h = document.getElementById("icon_prefix").value
+            var i = document.getElementById("Thewebsite").value
+            var j
+            var radios = document.getElementsByName('group1');
+
+            for (var i = 0, length = radios.length; i < length; i++) {
+              if (radios[i].checked) {
+                // do whatever you want with the checked radio
+                    j = radios[i].value
+                // only one radio can be logically checked, don't check the rest
+                break;
+              }
+            }
+            var k 
+            var checkboxes = document.getElementsByName('group3');
+
+            k = "";
+            for (var i = 0, length = checkboxes.length; i < length; i++) {
+              if (checkboxes[i].checked) {
+                if (k != "") {
+                  k = k + ", " + checkboxes[i].value;
+                } else {
+                  k = k + checkboxes[i].value;
+                }
+                
+                // do whatever you want with the checked radio
+                    //k = checkboxes[i].value + ", " + checkboxes[i+1].value
+                //break;
+              }
+            }
+            console.log(k);
+
+
+            alert("Your Profile Has Been Saved!")
+            var userId = document.getElementById("uid").innerHTML;
+             var tweetid = firebase.database().ref('Users/' + userId + "/").remove();
+       
+            var js_time = Date.now();
+            var tweetid = firebase.database().ref('Users/' + userId + "/").push({Biography: g, Website : h,Telephone: i, Occupation: j, Subjects: k, time: js_time});
+        }
+
+
+        function removeData() {
+            var userId = "ySF8zN14HNhOKovPdrPEGZAmoZr2"
+            var tweetid =firebase.database().ref('tweets/' + userId + "/").remove();
+           
+        }
+       
+        function signin(event) {
+                var provider = new firebase.auth.GoogleAuthProvider();
+                    firebase.auth().signInWithRedirect(provider);
+        }
 
         function signin() {
             var provider = new firebase.auth.GoogleAuthProvider();
@@ -473,7 +511,5 @@
         var instances = M.Sidenav.init(elems);
         });
 
-       
-       
-    </script> 
+</script>
 </html>
