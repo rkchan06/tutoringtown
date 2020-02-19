@@ -221,7 +221,7 @@
     </div>
     </li>
     <li><a href="index.html"><i class="material-icons">home</i>Home</a></li>
-    <li><a href="#!"><i class="material-icons">face</i>Find Tutors/Tutees</a></li>
+    <li><a href="find.html"><i class="material-icons">face</i>Find Tutors/Tutees</a></li>
     <li><a href="message.html"><i class="material-icons">message</i>Messages</a></li>
     <li><a href="profile.html"><i class="material-icons">account_circle</i>Profile</a></li>
     <li><a href="training.html"><i class="material-icons">mode_edit</i>Training</a></li>
@@ -246,6 +246,7 @@
               </table>
             </div>
           </div>
+                                   <h1 id="uid"></h1>
 
             <div class="top-leftcad">
               <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="medium material-icons icon-blue">menu</i></a>
@@ -259,18 +260,25 @@
 
 	<div class="row">
 		<div id="userpic" style="margin-top:50px; margin-left:100px;"></div>
-		<div id="username" style="margin-left:450px; font-size:70px"></div>
-		<p style="margin-left:450px; font-size:50px;"> Tutor/Tutee </p>
-		<div id="useremail" style="margin-left:450px; margin-top:0px; font-size: 40px;"></div>
+		<div id="username" style="margin-left:450px; margin-top: -30px; font-size:70px; font-family: fantasy;"></div>
+		<div id="occupation" style="margin-left:450px; font-size:35px; margin-top: -20px; font-family: fantasy;"></div>
+		<div id="useremail" style="margin-left:450px; margin-top:20px; font-size: 40px; font-family: fantasy;" ></div>
 	</div>
 
 	<div class="row">
-		<p style="margin-left:150px;">Subjects:</p>
+		<div id="subjects" style="margin-left:120px; margin-top: 50px; font-size: 25px; font-family: fantasy;"></div>
 	</div>
 	<div class="row">
-		<p style="margin-left:150px;">Bio:</p>
+		<div id="website" style="margin-left:120px; font-size: 25px; font-family: fantasy;"></div>
+	</div>
+	<div class="row">
+		<div id="telephone" style="margin-left:120px; font-size: 25px; font-family: fantasy;"></div>
+	</div>
+	<div class="row">
+		<div id="biography" style="margin-left:120px; font-size: 25px; font-family: fantasy;"></div>
+	</div>
 
-	<a href="myprofile.html" class="btn btn-default" style="background-color: #4c8bf5; margin-left: 550px;">Edit Profile<i class="material-icons right">edit</i></a>
+	<center><a href="myprofile.html" class="btn btn-default" style="background-color: #4c8bf5; margin-bottom: 100px; margin-top: 50px;">Edit Profile<i class="material-icons right">edit</i></a></center>
  </body>
 
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -297,62 +305,11 @@
                 return;
             } else {
                 userId = user.uid; // you can also get .displayName, .photoURL, .email
-                console.log(userId)
                 //document.getElementById("uid").innerHTML = userId; // display Google uid on page
                
             } // end user null check
         }); // end check auth state
        
-       // HERE IS THE FUNCTION TO SHOW HOW TO GET USER DATA
-       function getData() {
-           var userId = document.getElementById("uid").innerHTML;
-           firebase.database().ref('/tweets/' + userId).once('value', function(snapshot) {
-               console.log(snapshot.val());
-           });
-
-       }
-       
-       // HERE IS THE FUNCTION TO SHOW HOW TO SET/OVERWRITE USER DATA
-       function setData() {
-           var userId = document.getElementById("uid").innerHTML;
-           var js_time = Date.now();
-           firebase.database().ref('/tweets/' + userId).set({tweet:"Set over-writes", time: js_time});
-       }
-       
-       // HERE IS THE FUNCTION TO SHOW HOW TO SET/OVERWRITE USER DATA
-       function updateData() {
-           var userId = document.getElementById("uid").innerHTML;
-           firebase.database().ref('/tweets/' + userId).update({tweet:"Update replaces data, but will leave non replaced data as is"});
-       }
-         
-        // HERE IS THE FUNCTION TO SHOW HOW TO PUSH/ADD NEW USER DATA TO EXISTING DATABASE
-        function pushData() {
-           
-            var a = document.getElementById("first_name").value
-            var b = document.getElementById("option").value
-            var c = document.getElementById("subjects").value
-            var d = document.getElementById("password").value
-            var e = document.getElementById("email").value
-            var f = document.getElementById("desc").value
-            var g = document.getElementById("icon_prefix").value
-            var h = document.getElementById("Thewebsite").value
-            alert("Your Profile Has Been Saved!")
-            var userId = document.getElementById("uid").innerHTML;
-            var js_time = Date.now();
-            var tweetid = firebase.database().ref('Users/' + userId + "/").push({FirstName: a, LastName: b,Subjects: c,Language: d,Password: e,Email: f,Desc: g,Website : h,PhoneNumber: i, time: js_time})
-           
-        }
-        function removeData() {
-            var userId = "ySF8zN14HNhOKovPdrPEGZAmoZr2"
-            var tweetid =firebase.database().ref('tweets/' + userId + "/").remove();
-           
-        }
-       
-        function signin(event) {
-                var provider = new firebase.auth.GoogleAuthProvider();
-                    firebase.auth().signInWithRedirect(provider);
-        }
-
 
         firebase.auth().onAuthStateChanged(function(user) {
             if (user == null) {
@@ -393,18 +350,49 @@
 
         firebase.auth().onAuthStateChanged(function(user) {
                 userpic = user.photoURL; // you can also get .displayName, .photoURL, .email
-                document.getElementById("userpic").innerHTML = "<img src='" + userphoto + "'style='width:300px; height:300px;' class='circle'>"; // display Google uid on page
-        }); // end check auth state
-
-        firebase.auth().onAuthStateChanged(function(user) {
+                document.getElementById("userpic").innerHTML = "<img src='" + userphoto + "'style='width:300px; height:300px;' class='circle'>";
                 username = user.displayName; // you can also get .displayName, .photoURL, .email
                 document.getElementById("username").innerHTML = "<p style='margin-top:0px'>" + username + "</p>"; // display Google uid on page
-        }); // end check auth state
-
-        firebase.auth().onAuthStateChanged(function(user) {
                 useremail = user.email; // you can also get .displayName, .photoURL, .email
-                document.getElementById("useremail").innerHTML = useremail; // display Google uid on page
-        }); // end check auth state
+                document.getElementById("useremail").innerHTML = useremail; // display Google uid on pageb
+	    });
+
+
+        var userId = document.getElementById("uid").innerHTML;
+        firebase.database().ref('Users/' + userId + "/").once('value', function(snapshot) {
+               
+
+                var ref = firebase.database().ref("Users/" + userId + "/");
+				ref.once("value")
+				  .then(function(snapshot) {
+				  	snapshot.forEach(childsnapshot => {
+				  		console.log(childsnapshot.val())
+				  		const user = childsnapshot.val();
+				  		const biography = user.Biography;
+				  		const occupation = user.Occupation
+				  		const subjects = user.Subjects
+				  		const website = user.Website
+				  		const telephone = user.Telephone
+				  	document.getElementById("occupation").innerHTML = occupation
+				  	document.getElementById("biography").innerHTML = "Biography: " + biography
+				  	document.getElementById("subjects").innerHTML = "Subjects: " + subjects
+				  	document.getElementById("telephone").innerHTML = "Telephone #: " + telephone
+				  	document.getElementById("website").innerHTML = "Website: " + website
+
+				  	});
+				  	// var key = snapshot.key;
+				    // var childKey = snapshot.child(userId).key;
+				    // console.log(snapshot.child(userId).key)
+
+				    // document.getElementById("occupation").innerHTML = childKey // "last"
+				});
+
+ 
+
+				
+
+        });
+
 
         function signin() {
             var provider = new firebase.auth.GoogleAuthProvider();
