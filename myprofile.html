@@ -209,7 +209,6 @@
           }
           [type="radio"].with-gap:checked + span:before {
             border: 2px solid #4c8bf5;
-          }
 
 
   </style>
@@ -231,7 +230,7 @@
     </div>
     </li>
     <li><a href="index.html"><i class="material-icons">home</i>Home</a></li>
-    <li><a href="#!"><i class="material-icons">face</i>Find Tutors/Tutees</a></li>
+    <li><a href="find.html"><i class="material-icons">face</i>Find Tutors/Tutees</a></li>
     <li><a href="message.html"><i class="material-icons">message</i>Messages</a></li>
     <li><a href="profile.html"><i class="material-icons">account_circle</i>Profile</a></li>
     <li><a href="training.html"><i class="material-icons">mode_edit</i>Training</a></li>
@@ -256,8 +255,9 @@
               </table>
             </div>
           </div>
+                <h1 id="uid" style="font-color: white; font-size:1px;"></h1>
 
-                         <h1 id="uid"></h1>
+        
 
             <div class="top-leftcad">
               <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="medium material-icons icon-blue">menu</i></a>
@@ -329,7 +329,7 @@
         <div class="input-field col s12">
           <input id="desc" type="text" class="validate" required="" aria-required="true">
           <label for="desc">Biography (Tutors/Tutees will be able to see this, make sure to include important pieces such as classes you teach, etc...)</label>
-                    <span class="helper-text" data-error="Cannot be Empty" data-success=""></span>
+          <span class="helper-text" data-error="Cannot be Empty" data-success=""></span>
         </div>
       </div>
       <div class="row">
@@ -340,8 +340,8 @@
         </div>
         <div class="input-field col s6">
           <i class="material-icons prefix">phone</i>
-          <input id="Thewebsite" type="tel" class="validate">
-          <label for="Thewebsite">Telephone (optional)</label>
+          <input id="Telephone" type="text" class="validate">
+          <label for="Telephone">Telephone (optional)</label>
         </div>
       </div>
 
@@ -381,7 +381,8 @@
                 document.getElementById("uid").innerHTML = "not logged in";
                 return;
             } else {
-                userId = user.uid; // you can also get .displayName, .photoURL, .email // display Google uid on page
+                userId = user.uid;
+                document.getElementById('uid').innerHTML = userId // you can also get .displayName, .photoURL, .email // display Google uid on page
             } // end user null check
         }); // end check auth state
 
@@ -447,10 +448,9 @@
         function pushData() {
             var g = document.getElementById("desc").value
             var h = document.getElementById("icon_prefix").value
-            var i = document.getElementById("Thewebsite").value
+            var telephone = document.getElementById("Telephone").value
             var j
             var radios = document.getElementsByName('group1');
-
             for (var i = 0, length = radios.length; i < length; i++) {
               if (radios[i].checked) {
                 // do whatever you want with the checked radio
@@ -481,10 +481,12 @@
 
             alert("Your Profile Has Been Saved!")
             var userId = document.getElementById("uid").innerHTML;
-             var tweetid = firebase.database().ref('Users/' + userId + "/").remove();
+            console.log(userId)
+            var tweetid = firebase.database().ref('Users/' + userId + "/").remove();
        
             var js_time = Date.now();
-            var tweetid = firebase.database().ref('Users/' + userId + "/").push({Biography: g, Website : h,Telephone: i, Occupation: j, Subjects: k, time: js_time});
+            var tweetid = firebase.database().ref('Users/' + userId).push({Biography: g, Website : h, Telephone: telephone, Occupation: j, Subjects: k, time: js_time});
+
         }
 
 
