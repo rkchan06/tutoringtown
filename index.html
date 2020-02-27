@@ -486,11 +486,161 @@
           animation-name: jackInTheBox;
           display: none;
         }
+        label + label {
+          margin-left: 10px;
+        }
+          [type="checkbox"].filled-in:checked + span:not(.lever):after {
+            background-color: #4c8bf5 !important;
+            border: none;
+          }
+
+          [type="radio"].with-gap:checked + span:after {
+            background-color: #4c8bf5 !important;
+            border: none;
+            border: 2px solid #4c8bf5;
+          }
+          [type="radio"].with-gap:checked + span:before {
+            border: 2px solid #4c8bf5;
+          }
+        .input-field input:focus + label {
+          color: #4c8bf5 !important;
+        }
+        .row .input-field input:focus {
+          border-bottom: 1px solid #4c8bf5 !important;
+          box-shadow: 0 1px 0 0 #4c8bf5 !important
+        }
+        .modal { 
+          width: 60% !important ;
+        } 
 
 
   </style>
 
 <body>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <h4 style="font-family: fantasy;">Sign In to Access Website</h4>
+        <center>
+        <img id="signin" onclick="signin()" src="googlesignin.jpg" style="margin-bottom: 70px" width="300px" height="60px">
+        </center>
+        <p>A bunch of text</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Exit</a>
+      </div>
+    </div>
+
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4 style="font-family: fantasy;">Are you sure you want to logout?</h4>
+        <center>
+        <a class="waves-effect waves-light btn" style="background-color: #1ddb4f; margin-right: 100px;" onclick = "signout()"><i class="material-icons right">check</i>Yes</a>
+        <a class="btn modal-action modal-close waves-effect waves-light btn-flat" style="background-color: #e01414;"><i class="material-icons right">clear</i>No</a>
+        <center>
+      </div>
+    </div>
+
+    <div id="modal2" class="modal">
+      <div id="oog"></div>
+      <div class="modal-content">
+        <h4 style="font-family: fantasy;">Creating your profile</h4>
+        
+          <div class="row">
+              <div class="input-field col s12">
+                <input id="name1" type="text" class="validate" required="" aria-required="true">
+                <label id="nameewd" for="name1">Full Name</label>
+                <span class="helper-text" data-error="Cannot be Empty" data-success=""></span>
+              </div>
+          </div>
+          <div class="row" style="margin-top:-50px;">
+              <div class="input-field col s12">
+                <input id="email1" type="text" class="validate" required="" aria-required="true">
+                <label for="email1">Email</label>
+                <span class="helper-text" data-error="Cannot be Empty" data-success=""></span>
+              </div>
+          </div>
+          <label style="margin-left: 10px; font-size: 15px; margin-top:-500px;">Are you a tutor or tutee?</label>
+          <div class="row">
+              <form class="col s12">
+              <div class="row">
+                  <form class="col s12">
+                    <div class="row">
+                      <div style="margin-left: 320px;">
+                      <label>
+                        <input name="group1" class="with-gap"  type="radio" id="test3" value="Tutor" checked />
+                        <span>Tutor</span>
+                      </label>
+                      <label>
+                        <input name="group1" class="with-gap"  type="radio" id="test3" value="Tutee" />
+                        <span>Tutee</span>
+                      </label>
+                    </div>
+                </div>
+
+          <label id="subj" style="margin-left: 8px; font-size: 15px;">Select all subjects of specialty/need (check all that apply):</label>
+            <div class="row">
+              <br>
+              <label style="margin-left: 20px;">
+              <input type="checkbox" name="group3" value="English" class="filled-in checkbox-blue" />
+              <span>English</span>
+              </label>
+              <label>
+              <input type="checkbox" name="group3" value="French" class="filled-in checkbox-blue"/>
+              <span>French</span>
+              </label>
+              <label>
+              <input type="checkbox" name="group3" value="History" class="filled-in checkbox-blue" />
+              <span>History</span>
+              </label>
+              <label>
+              <input type="checkbox" name="group3" value="Geography" class="filled-in checkbox-blue" />
+              <span>Geography</span>
+              </label>
+              <label>
+              <input type="checkbox" name="group3" value="Math" class="filled-in checkbox-blue" />
+              <span>Math</span>
+              </label>
+              <label>
+              <input type="checkbox" name="group3" value="Science" class="filled-in checkbox-blue" />
+              <span>Science</span>
+              </label>
+              <label>
+              <input type="checkbox" name="group3" value="Music" class="filled-in checkbox-blue" />
+              <span>Music</span>
+              </label>
+              <label>
+              <input type="checkbox" name="group3" value="Arts" class="filled-in checkbox-blue" />
+              <span>Arts</span>
+              </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="desc"  type="text" class="validate" required="" aria-required="true" maxlength = "250">
+                <label for="desc">Biography</label>
+                <span class="helper-text" data-error="Cannot be Empty" data-success=""></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="icon_prefix" type="text" class="validate">
+                <label for="icon_prefix">Website (optional)</label>
+              </div>
+              <div class="input-field col s6">
+                <i class="material-icons prefix">phone</i>
+                <input id="Telephone" type="text" class="validate">
+                <label for="Telephone">Telephone (optional)</label>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <center><button class="btn waves-effect waves-light" style="background-color: #4c8bf5;" type="submit" name="action" onclick = "pushData()">Save Profile<i class="material-icons right">send</i></button></center>
+      </div>
+    </div>
+
     <div >
         <ul id="slide-out" class="sidenav">
           <li>
@@ -506,10 +656,11 @@
     </div>
     </li>
     <li><a href="index.html"><i class="material-icons">home</i>Home</a></li>
-    <li><a href="#!"><i class="material-icons">face</i>Find Tutors/Tutees</a></li>
+    <li><a href="find.html"><i class="material-icons">face</i>Find Tutors/Tutees</a></li>
     <li><a href="message.html"><i class="material-icons">message</i>Messages</a></li>
     <li><a href="profile.html"><i class="material-icons">account_circle</i>Profile</a></li>
     <li><a href="training.html"><i class="material-icons">mode_edit</i>Training</a></li>
+    <li><a onclick="checker()"><i class="material-icons">exit_to_app</i>Log out</a></li>
     <li><div class="divider"></div></li>
 
     </ul>
@@ -524,13 +675,14 @@
 
           <div class="row center">
             <h5 style="margin-bottom: 50px; font-family: fantasy; font-style: italic;" class="header col s12 black-text light">Matching Tutors and Tutees Since 2020</h5>
-          <img onclick="signin()" src="googlesignin.jpg" style="margin-bottom: 70px" width="300px" height="60px">
+            <div id="oop">
+            </div>
           </div>
 
         </div>
 
-          <div class="top-leftcad">
-            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="medium material-icons icon-blue">menu</i></a>
+          <div id="ooo" class="top-leftcad">
+
           </div>
 
         <br><br>
@@ -547,7 +699,7 @@
             <td>
               <div class="test">            
                 <h4 style="font-family: fantasy; font-weight: bold; margin-left: 200px; float: left;">About Us</h4>
-                <p style= "margin-right: 100px;float: left; font-size: 15px;">Here at Tutoring Town, we match tutors and tutees together based on subjects of need and personality traits. We believe it is of utmost importance for tutors and tutees to have similar interests as often times, they do not and the experience becomes extremely awkward for both people. By having similar interests, this allows for the bond to be stronger, making tutoring a more fun and enjoyable experience. </p>
+                <p style= "margin-right: 100px;float: left; font-size: 15px;">Here at Tutoring Town, we match tutors and tutees together based on subjects of need and personality traits. We believe it is of utmost importance for tutors and tutees to have similar interests as often times, they do not and the experience becomes extremely awkward for both people. By having similar interests, this allows the bond to be stronger, making tutoring a more fun and enjoyable experience. </p>
               </td><td>
                 <div id = "animated-example" class = "animated fadeInRight">
                 <img src="logovertical.jpg" style="float: right; width: 300px; height: 300px;">
@@ -629,61 +781,108 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
                
-        // Check to see if you are logged in
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user == null) {
-                //document.getElementById("uid").innerHTML = "not logged in";
-                return;
-            } else {
-                useremail = user.email; // you can also get .displayName, .photoURL, .email
-                //document.getElementById("uid").innerHTML = useremail; // display Google uid on page
-                
-
-            } // end user null check
-        }); // end check auth state
-
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user == null) {
-                document.getElementById("navphoto").innerHTML = "not logged in";
-                return;
-            } else {
-                userphoto = user.photoURL; // you can also get .displayName, .photoURL, .email
-                document.getElementById("navphoto").innerHTML = "<img src='" + userphoto + "' class='circle'>"; // display Google uid on page
-                
-
-            } // end user null check
-        }); // end check auth state
-
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user == null) {
-                document.getElementById("name").innerHTML = "not logged in";
-                return;
-            } else {
-                username = user.displayName; // you can also get .displayName, .photoURL, .email
-                document.getElementById("name").innerHTML = username; // display Google uid on page
-                
-
-            } // end user null check
-        }); // end check auth state
-
         firebase.auth().onAuthStateChanged(function(user) {
             if (user == null) {
                 document.getElementById("email").innerHTML = "not logged in";
+                document.getElementById("name").innerHTML = "not logged in";
+                document.getElementById("navphoto").innerHTML = "not logged in";
+                document.getElementById("oop").innerHTML = '<a class="waves-effect waves-light btn" style="background-color: #4c8bf5;" onclick = "modal()"><i class="material-icons right">send</i>Click to Sign In</a>'
+                $(document).ready(function(){
+                  $('#modal').modal();
+                  $('#modal').modal('open'); 
+                });
+                document.getElementById("oo").setAttribute('onclick','index.html')
                 return;
             } else {
-                useremail = user.email; // you can also get .displayName, .photoURL, .email
-                document.getElementById("email").innerHTML = useremail; // display Google uid on page
                 userId = user.uid;
-                
+
+                firebase.database().ref('Users/' + userId + "/").once('value', function(snapshot) {
+
+                    props = Object.values(snapshot.val());
+
+                    const name2 = props[0].Name
+                    const email2 = props[0].Email
+
+                  if (snapshot.val() == null) {
+                    $('#modal2').modal({dismissible:false});
+                    $('#modal2').modal('open');
+                  } else {
+
+                    userphoto = user.photoURL; // you can also get .displayName, .photoURL, .email
+                    document.getElementById("navphoto").innerHTML = "<img src='" + userphoto + "'class='circle'>";
+                    document.getElementById("email").innerHTML = email2
+                    document.getElementById("name").innerHTML = name2
+                    return;
+                  }
+
+                });
+
 
             } // end user null check
         }); // end check auth state
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user != null) {
+              document.getElementById("ooo").innerHTML = '<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="medium material-icons icon-blue">menu</i></a>';
+            } else {
+              document.getElementById("ooo").innerHTML = '<a onclick="alertabc()"><i class="medium material-icons icon-blue">menu</i></a>'
+            }
+        });
+
+        /*firebase.auth().onAuthStateChanged(function(user) {
+
+          userId = user.uid;
+
+          firebase.database().ref('Users/' + userId + "/").once('value', function(snapshot) {
+            //var ref = firebase.database().ref("Users/" + userId + "/");
+            //ref.once("value")
+              .then(function(snapshot) {
+                snapshot.forEach(childsnapshot => {
+                  const name2 = user.Name
+                  const email2 = user.Email
+                  const subjects = user.Subjects
+                  const biography = user.Biography;
+                  const occupation = user.Occupation
+
+                  //if (user != null || name2 == null || name2 == "" || email2 == null || email2 == "" || subjects == null || subjects == "" || biography == null || biography == "" || occupation == null || occupation == "") {
+                  //  $('#modal2').modal({dismissible:false});
+                  //  $('#modal2').modal('open');
+                  //}
+              });
+            });
+          });
+        });
+        */
+
         function signin() {
             var provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithRedirect(provider).then(function(result) { 
                 window.location.replace("fbtest.html");
             });
         }
+
+        function alertabc() {
+          alert("Please sign in to enter and view all features of the website");
+        }
+
+        function modal() {
+            $('#modal').modal();
+            $('#modal').modal('open'); 
+        }
+
+        function signout(){
+          firebase.auth().signOut().then(function() {
+              window.location.replace("index.html");
+          }, function(error) {
+              // An error happened.
+          });
+        }
+
+        function checker() {
+            $('#modal1').modal();
+            $('#modal1').modal('open');
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.sidenav');
         var instances = M.Sidenav.init(elems);
@@ -691,7 +890,7 @@
         window.onscroll = function() {handleScroll()};
 
         function handleScroll() {
-          if (document.body.scrollTop > 450 || document.documentElement.scrollTop > 450) {
+          if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
               let animations = document.getElementsByClassName("animated");
               for(let i = 0; i < animations.length; i++){
                 animations[i].style.display = "block"
@@ -699,6 +898,82 @@
 
           }
         }
+        function pushData() {
+            var e = document.getElementById("name1").value
+            if (e == null || e == "") {
+              alert("Please fill out your name");
+              document.getElementById("name1").style.borderColor = "red";
+              return false;
+            }
+            var f = document.getElementById("email1").value
+            if (f == null || f == "") {
+              alert("Please fill out your email");
+              document.getElementById("email1").style.borderColor = "red";
+              return;
+            }
+            var g = document.getElementById("desc").value
+            if (g == null || g == "") {
+              alert("Please fill out your biography");
+              document.getElementById("desc").style.borderColor = "red";
+              return;
+            }
+            var h = document.getElementById("icon_prefix").value
+            var telephone = document.getElementById("Telephone").value
+            var j
+            var radios = document.getElementsByName('group1');
+            for (var i = 0, length = radios.length; i < length; i++) {
+              if (radios[i].checked) {
+                // do whatever you want with the checked radio
+                    j = radios[i].value
+                // only one radio can be logically checked, don't check the rest
+                break;
+              }
+            }
+            var k 
+            var checkboxes = document.getElementsByName('group3');
+
+            k = "";
+            for (var i = 0, length = checkboxes.length; i < length; i++) {
+              if (checkboxes[i].checked) {
+                if (k != "") {
+                  k = k + ", " + checkboxes[i].value;
+                } else {
+                  k = k + checkboxes[i].value;
+                }
+                
+                // do whatever you want with the checked radio
+                    //k = checkboxes[i].value + ", " + checkboxes[i+1].value
+                //break;
+              }
+            }
+            if (k == null || k == "") {
+              alert("Please select some subjects");
+              document.getElementById("subj").style.color = "red"
+              return;
+            }
+
+
+
+            alert("Your Profile Has Been Saved Successfully!")
+            var tweetid = firebase.database().ref('Users/' + userId + "/").remove();
+       
+            var js_time = Date.now();
+            var tweetid = firebase.database().ref('Users/' + userId).push({Name: e, Email: f, Biography: g, Website : h, Telephone: telephone, Occupation: j, Subjects: k, time: js_time});
+
+            closer12()
+
+        }
+
+        function closer12() {
+          $('#modal2').modal({dismissible:true});
+        }
+
+        function oog() {
+          alert("Please fill out your profile to continue")
+        }
+
+
+        
 
     </script>
 
