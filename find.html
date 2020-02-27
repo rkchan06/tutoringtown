@@ -235,6 +235,7 @@
     <li><a href="message.html"><i class="material-icons">message</i>Messages</a></li>
     <li><a href="profile.html"><i class="material-icons">account_circle</i>Profile</a></li>
     <li><a href="training.html"><i class="material-icons">mode_edit</i>Training</a></li>
+    <li><a onclick="signout()"><i class="material-icons">exit_to_app</i>Log out</a></li>
     <li><div class="divider"></div></li>
 
     </ul>
@@ -333,6 +334,14 @@
         }); // end check auth state
        // HERE IS THE FUNCTION TO SHOW HOW TO GET USER DATA
 
+        function signout(){
+          firebase.auth().signOut().then(function() {
+              window.location.replace("index.html");
+          }, function(error) {
+              // An error happened.
+          });
+        }
+
          
    
          
@@ -379,7 +388,7 @@
 
                     console.log(data[0]["Subjects"])
 
-                    str+="<div class='row'><div class='col1 s0 m6'><div class='card'><div class='card-content'><h5 id='teachername1' style='font-family: fantasy; font-size: 30px;'>" + username + " | " + (data[0]["Occupation"]) + "</h5><p id='subjects' style='font-family: fantasy; font-size: 20px;'><b>" + (data[0]["Subjects"]) + "</b></p></div><div class='card-tabs'><ul class='tabs tabs-fixed-width'><li class='tab'><a href='https://www.youtube.com/channel/UCj3EXpr5v35g3peVWnVLoew' id='website' style='color: #4c8bf5;'>Website</a></li><li class='tab' id='contact'><a href='https://www.youtube.com/user/tdewitt451/about' style='color: #4c8bf5;' >Contact me!</a></li></ul></div><div class='card-content grey lighten-4'><div id='test4'>" + (data[0]["Biography"]) + "</div></div></div></div></div>"
+                    str+="<div class='row'><div class='col1 s0 m6'><div class='card'><div class='card-content'><h5 id='teachername1' style='font-family: fantasy; font-size: 30px;'>" + (data[0]["Name"]) + " | " + (data[0]["Occupation"]) + "</h5><p id='subjects' style='font-family: fantasy; font-size: 20px;'><b>" + (data[0]["Subjects"]) + "</b></p></div><div class='card-tabs'><ul class='tabs tabs-fixed-width'><li class='tab'><a href='https://www.youtube.com/channel/UCj3EXpr5v35g3peVWnVLoew' id='website' style='color: #4c8bf5;'>About Me</a></li><li class='tab'><a href='https://www.youtube.com/channel/UCj3EXpr5v35g3peVWnVLoew' id='website' style='color: #4c8bf5;'>Website</a></li><li class='tab' id='contact'><a href='https://www.youtube.com/user/tdewitt451/about' style='color: #4c8bf5;' >Message</a></li><li class='tab' id='contact'><a href='https://www.youtube.com/user/tdewitt451/about' style='color: #4c8bf5;' >Contact me!</a></li></ul></div><div class='card-content grey lighten-4'><div id='test4'>" + (data[0]["Biography"]) + "</div></div></div></div></div>"
                     //console.log(str)
 
                     // for(j=0;j<data.length;j++){
