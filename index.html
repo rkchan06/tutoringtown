@@ -521,9 +521,8 @@
       <div class="modal-content">
         <h4 style="font-family: fantasy;">Sign In to Access Website</h4>
         <center>
-        <img id="signin" onclick="signin()" src="googlesignin.jpg" style="margin-bottom: 70px" width="300px" height="60px">
+        <img id="signin" onclick="signin()" src="googlesignin.jpg" width="300px" height="60px">
         </center>
-        <p>A bunch of text</p>
       </div>
       <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Exit</a>
@@ -798,15 +797,14 @@
 
                 firebase.database().ref('Users/' + userId + "/").once('value', function(snapshot) {
 
-                    props = Object.values(snapshot.val());
-
-                    const name2 = props[0].Name
-                    const email2 = props[0].Email
 
                   if (snapshot.val() == null) {
                     $('#modal2').modal({dismissible:false});
                     $('#modal2').modal('open');
                   } else {
+                    props = Object.values(snapshot.val());
+                    const name2 = props[0].Name
+                    const email2 = props[0].Email
 
                     userphoto = user.photoURL; // you can also get .displayName, .photoURL, .email
                     document.getElementById("navphoto").innerHTML = "<img src='" + userphoto + "'class='circle'>";
