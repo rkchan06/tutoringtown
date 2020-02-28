@@ -495,6 +495,9 @@
           animation-name: jackInTheBox;
           display: none;
         }
+        #chatbox {
+          height: 200px;
+        }
       </style>
 
 
@@ -515,8 +518,8 @@
     </div>
     </li>
     <li><a href="index.html"><i class="material-icons">home</i>Home</a></li>
-    <li><a href="#!"><i class="material-icons">face</i>Find Tutors/Tutees</a></li>
-    <li><a href="#!"><i class="material-icons">message</i>Messages</a></li>
+    <li><a href="find.html"><i class="material-icons">face</i>Find Tutors/Tutees</a></li>
+    <li><a href="message.html"><i class="material-icons">message</i>Messages</a></li>
     <li><a href="profile.html"><i class="material-icons">account_circle</i>Profile</a></li>
     <li><a href="training.html"><i class="material-icons">mode_edit</i>Training</a></li>
     <li><div class="divider"></div></li>
@@ -544,16 +547,9 @@
       <div class="parallax"><img src="background1.jpg" height= "500px"></div>
     </div>
 
-            <button onclick="signin()">Sign in</button>
-            <button onclick="getData()">Get data</button>
-            <button onclick="setData()">Set data</button>
-            <button onclick="updateData()">Update data</button>
-            <button onclick="pushData()">Push data</button>
-            <button onclick="removeData()">Remove data</button>
-            <div id="info"></div>
 
-    <div id='chatbox'>
-      <p style="text-align:center; font-size:30px;">Chatbox</p>
+    <p style="text-align:center; font-size:30px;">General Chat</p>
+    <div id='chatbox' style="margin-left:100px; margin-right:100px;">
       <div id='chatlog'></div>
       <input id='chatinput'placeholder='Type Something...'></input>
     </div>
@@ -562,7 +558,6 @@
     
     <!-- HERE IS THE JAVASCRIPT TO CONNECT TO YOUR FIREBASE -->
     <script>
-      var loggedin = false;
         // Your web app's Firebase configuration
        var firebaseConfig = {
         apiKey: "AIzaSyBlNsGsMWj3OpLb0POg3mKe8Rp59atOEd4",
@@ -581,6 +576,7 @@
         firebase.auth().onAuthStateChanged(function(user) {
             if (user == null) {
                 document.getElementById("uid").innerHTML = "not logged in";
+                window.location.replace("index.html");
                 return;
             } else {
                 userId = user.uid; // you can also get .displayName, .photoURL, .email
@@ -678,9 +674,9 @@
         const status = document.getElementById('chatlog')
         firebase.auth().onAuthStateChanged(function(user) {
             if (user == null) {
-                alert('fuckin login!!!')
+                alert('Please login!!!')
             } else {
-                alert('hello friend')
+                alert('Welcome to the General Chatroom (Please Refrain from using profane language)')
             
             clear();
             $('#chatbox').css('display','block');
@@ -766,5 +762,9 @@
         $('#settings').css('display','none');
         $('#app').css('display','none');
       }
+        document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+        });
     </script>
 </html>
