@@ -801,6 +801,7 @@
                   if (snapshot.val() == null) {
                     $('#modal2').modal({dismissible:false});
                     $('#modal2').modal('open');
+                    alert("Please fill in your profile to continue")
                   } else {
                     props = Object.values(snapshot.val());
                     const name2 = props[0].Name
