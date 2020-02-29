@@ -835,9 +835,7 @@
 
         const status = document.getElementById('chatlog')
         firebase.auth().onAuthStateChanged(function(user) {
-            if (user == null) {
-                alert('Please login!!!')
-            } else {
+            if (user != null) {
                 alert('Welcome to the General Chatroom (Please Refrain from using profane language)')
             
             clear();
