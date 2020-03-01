@@ -816,12 +816,16 @@
                     userphoto = user.photoURL;
                     userId = user.uid;
                     username = user.displayName;
+
+
+                  for(i=0;i<post.length;i++){
+                    data=Object.values(post[i])
  // end check auth state
                         str+="<div class='card' style='margin-left:10px; margin-right:10px;'><div class='card-content'><h5 id='teachername1' style='font-family: fantasy; font-size: 30px;'>" + (data[0]["Name"]) + " | " + (data[0]["Occupation"]) + "</h5><p id='subjects' style='font-family: fantasy; font-size: 20px;'><b>" + (data[0]["Subjects"]) + "</b></p></div><div class='card-tabs'><ul class='tabs tabs-fixed-width'><li class='tab' id='contact'><a onclick='abc45()' style='color: #4c8bf5;' >Message Me</a></li></ul></div><div id='rrr' class='card-content grey lighten-4'><p>Biography: " + (data[0]["Biography"]) + "</p><p>Contact Me: " + (data[0]["Email"]) + "</p><div id='test4'></div></div></div>"
                         document.getElementById("oof").innerHTML=str;
-                      });
+                      };
                   });
-              };
+              });
             };
             createcard()
 
